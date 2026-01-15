@@ -11,6 +11,7 @@ CREATE TABLE community_member
 );
 
 select * from community_member;
+-- 암호화 처리된 멤버 정보 회원가입 완료
 
 -- community_board: 모집 글을 저장하기 위한 테이블
 CREATE TABLE community_board (
@@ -30,6 +31,16 @@ CREATE TABLE community_board (
              ON DELETE SET NULL
 );
 
+select * from community_board;
+-- 보드 더미 데이터
+insert into community_board (member_id, category, title, contents, capacity)
+values
+    ('aaa', 'HEALTHY',  '건강을 위해 운동할 사람들', '건강', 5),
+    ('ccc', 'TRIP', '세계여행 인원 모집', '세계여행', 4),
+    ('ccc', 'HEALTHY', '헛둘헛둘 한강러닝', '헛둘', 10),
+    ('aaa', 'STUDY', '카공 인원 모집', '신촌역 5시', 4);
+
+
 -- community_group : 모임 정보를 저장할 테이블
 CREATE TABLE community_group
 (
@@ -44,4 +55,13 @@ CREATE TABLE community_group
      CONSTRAINT fk_group_member FOREIGN KEY (member_id) REFERENCES community_member(member_id) ON DELETE CASCADE
 );
 
-delete from community_board;
+select * from community_group;
+-- 그룹 더미 데이터
+insert into community_group (board_num, member_id, role, status)
+values
+    (1, 'aaa', 'LEADER', 'JOINED'),
+    (2, 'ccc', 'LEADER', 'JOINED'),
+    (2, 'ccc', 'LEADER', 'JOINED'),
+    (1, 'aaa', 'LEADER', 'JOINED'),
+    (4, 'ddd', 'MEMBER', 'JOINED');
+
