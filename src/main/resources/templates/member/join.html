@@ -5,32 +5,36 @@
     <title>JOIN</title>
     <script th:src="@{/js/jquery-3.7.1.js}"></script>
     <script th:src="@{/js/join.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
 <body>
-    <p><a th:href="@{/}">HOME</a></p>
-    <h1>회원가입</h1>
+    <div class="container">
+        <p class="top-link">
+            <a th:href="@{/}">HOME</a>
+        </p>
+        <h1>회원가입</h1>
 
-    <form id="joinForm" action="/member/join" method="post">
-        <table border="1">
-            <tr>
-                <td>아이디</td>
-                <td><input type="text" id="memberId" name="id"></td>
-            </tr>
-            <tr>
-                <td>비밀번호</td>
-                <td><input type="password" id="password" name="password"></td>
-            </tr>
-            <tr>
-                <td>이름</td>
-                <td><input type="text" id="name" name="name"></td>
-            </tr>
-            <tr>
-                <td>이메일</td>
-                <td><input type="email" id="email" name="email"></td>
-            </tr>
-        </table>
-        <button type="button" id="joinButton">가입</button>
-    </form>
-
+        <form id="joinForm" action="/member/join" method="post">
+            <table border="1">
+                <tr>
+                    <td>아이디</td>
+                    <td><input type="text" id="memberId" name="id"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" id="name" name="name"></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="email" id="email" name="email"></td>
+                </tr>
+            </table>
+            <button type="button" id="joinButton">가입</button>
+        </form>
+    </div>
 </body>
 </html>

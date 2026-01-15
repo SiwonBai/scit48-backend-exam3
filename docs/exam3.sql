@@ -11,8 +11,6 @@ CREATE TABLE community_member
 );
 
 select * from community_member;
--- delete from community_member;
-
 
 -- community_board: 모집 글을 저장하기 위한 테이블
 CREATE TABLE community_board (
@@ -31,19 +29,6 @@ CREATE TABLE community_board (
              REFERENCES community_member(member_id)
              ON DELETE SET NULL
 );
-insert into test.community_board (member_id, category, title, contents, capacity, status)
-values
-    ('aaa', 'HEALTHY', '건강해져요', '주 2회 한강 러닝할분', 5, 'CLOSE'),
-    ('aaa', 'STUDY', 'Spring 스터디 모집', '주 2회 스프링 공부할 분', 5, 'CLOSE'),
-    ('aaa', 'TRIP', '부산 여행 같이 가요', '2박 3일 여행 멤버 모집', 4, 'OPEN');
-
-UPDATE community_board
-SET status = 'CLOSED'
-WHERE status = 'CLOSE';
-
-
-select * from community_board;
-delete from community_board;
 
 -- community_group : 모임 정보를 저장할 테이블
 CREATE TABLE community_group
@@ -59,11 +44,4 @@ CREATE TABLE community_group
      CONSTRAINT fk_group_member FOREIGN KEY (member_id) REFERENCES community_member(member_id) ON DELETE CASCADE
 );
 
-INSERT INTO community_group (board_num, member_id, role, status)
-VALUES
-    (1, 'user01', 'LEADER', 'JOINED'),
-    (1, 'user02', 'MEMBER', 'JOINED'),
-    (1, 'user03', 'MEMBER', 'PENDING'),
-    (2, 'user02', 'LEADER', 'JOINED');
-
-select * from community_group;
+delete from community_board;

@@ -4,29 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>HOME</title>
-    <style>
-        .body { width: 800px; margin: 100px auto; text-align:center; }
-        a { display:block; margin: 20px 0; color: purple; font-size: 20px; text-decoration:none; }
-        h1 { font-size: 60px; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 
 </head>
 <body>
-    <h1>HOME</h1>
+    <div class="container">
+        <h1>HOME</h1>
 
-    <!-- 로그인 전 -->
-    <div sec:authorize="isAnonymous()">
-        <a th:href="@{/member/joinForm}">회원가입</a>
-        <a th:href="@{/member/loginForm}">로그인</a>
+        <!-- 로그인 전 -->
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/member/joinForm}">회원가입</a>
+            <a th:href="@{/member/loginForm}">로그인</a>
+        </div>
+
+        <!-- 로그인 후 -->
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{member/logout}">로그아웃</a>
+            <a th:href="@{/member/mypage}">마이페이지</a>
+            <a th:href="@{/board/list}">게시판</a>
+        </div>
     </div>
-
-    <!-- 로그인 후 -->
-    <div sec:authorize="isAuthenticated()">
-        <a th:href="@{member/logout}">로그아웃</a>
-        <a th:href="@{/member/mypage}">마이페이지</a>
-        <a th:href="@{/board/list}">게시판</a>
-    </div>
-
 
 
 </body>

@@ -4,73 +4,79 @@
     <meta charset="UTF-8">
     <title>DETAIL</title>
     <script th:src="@{/js/jquery-3.7.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
 <body>
-    <p><a th:href="@{/}">HOME</a></p>
+    <div class="container">
+        <p class="top-link">
+            <a th:href="@{/}">HOME</a>
+        </p>
 
-    <h2>글 상세보기</h2>
+        <h2>글 상세보기</h2>
 
-    <table border="1">
-        <tr>
-            <td>번호</td>
-            <td th:text="${board.boardNum}"></td>
-            <td>카테고리</td>
-            <td th:text="${board.category}"></td>
-            <td>주최자</td>
-            <td th:text="${board.member.memberId}"></td>
-        </tr>
-        <tr>
-            <td>모집인원</td>
-            <td th:text="|${board.headcnt} / ${board.capacity}|"></td>
-            <td>모집현황</td>
-            <td th:text="${board.status}"
-                th:style="${board.status == 'OPEN'} ? 'color:blue' : 'color:red'"></td>
-            <td>작성일</td>
-            <td th:text="${#temporals.format(board.createDate,'yy.MM.dd HH:mm')}"></td>
-        </tr>
-        <tr>
-            <td>제목</td>
-            <td colspan="5" th:text="${board.title}"></td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td colspan="5" th:text="${board.contents}"></td>
-        </tr>
-    </table>
+        <table border="1">
+            <tr>
+                <td>번호</td>
+                <td th:text="${board.boardNum}"></td>
+                <td>카테고리</td>
+                <td th:text="${board.category}"></td>
+                <td>주최자</td>
+                <td th:text="${board.member.memberId}"></td>
+            </tr>
+            <tr>
+                <td>모집인원</td>
+                <td th:text="|${board.headcnt} / ${board.capacity}|"></td>
+                <td>모집현황</td>
+                <td th:text="${board.status}"
+                    th:style="${board.status == 'OPEN'} ? 'color:blue' : 'color:red'"></td>
+                <td>작성일</td>
+                <td th:text="${#temporals.format(board.createDate,'yy.MM.dd HH:mm')}"></td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td colspan="5" th:text="${board.title}"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td colspan="5" th:text="${board.contents}"></td>
+            </tr>
+        </table>
 
-    <br>
+        <br>
 
-    <!-- 작성자일 경우 -->
-    <div th:if="${isWriter}">
-        <button th:onclick="|location.href='/group/check?boardNum=${board.boardNum}'|">
-            확인하기
-        </button>
+        <!-- 작성자일 경우 -->
+        <div th:if="${isWriter}">
+            <button th:onclick="|location.href='/group/check?boardNum=${board.boardNum}'|">
+                확인하기
+            </button>
 
-        <form th:action="@{/board/delete}" method="post" style="display:inline"
-              onsubmit="return confirm('정말 삭제하시겠습니까?');">
-            <input type="hidden" name="boardNum" th:value="${board.boardNum}">
-            <button type="submit">삭제하기</button>
-        </form>
+            <form th:action="@{/board/delete}" method="post" style="display:inline"
+                  onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+                <button type="submit">삭제하기</button>
+            </form>
+        </div>
+
+
+        <!-- 신청 버튼 -->
+        <div th:if="${!isWriter and board.status eq 'OPEN'}">
+            <form th:action="@{/board/apply}" method="post">
+                <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+                <button type="submit">신청하기</button>
+            </form>
+        </div>
+
+        <!-- 다른 사용자 + 마감 -->
+        <div th:if="${!isWriter and board.status eq 'CLOSED'}">
+            마감되었습니다.
+        </div>
+
+        <!-- alert -->
+        <script th:if="${dup}">
+            alert('중복 신청할 수 없습니다.');
+        </script>
+
     </div>
-
-
-    <!-- 신청 버튼 -->
-    <div th:if="${!isWriter and board.status eq 'OPEN'}">
-        <form th:action="@{/board/apply}" method="post">
-            <input type="hidden" name="boardNum" th:value="${board.boardNum}">
-            <button type="submit">신청하기</button>
-        </form>
-    </div>
-
-    <!-- 다른 사용자 + 마감 -->
-    <div th:if="${!isWriter and board.status eq 'CLOSED'}">
-        마감되었습니다.
-    </div>
-
-    <!-- alert -->
-    <script th:if="${dup}">
-        alert('중복 신청할 수 없습니다.');
-    </script>
 
 </body>
 </html>

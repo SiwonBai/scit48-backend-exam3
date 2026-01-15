@@ -1,0 +1,114 @@
+/* =========================
+   COMMON CSS (Simple & Safe)
+   ========================= */
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Layout */
+.container {
+    width: 900px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+/* Top link */
+.top-link {
+    margin-bottom: 20px;
+}
+
+.top-link a {
+    color: #333;
+    text-decoration: none;
+}
+
+.top-link a:hover {
+    text-decoration: underline;
+}
+
+/* Headings */
+h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
+    margin: 20px 0 10px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Forms */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Buttons */
+button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: 1px solid #666;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+/* Status */
+.status-open {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-closed {
+    color: red;
+    font-weight: bold;
+}
+
+/* Message */
+.error-message {
+    margin-top: 15px;
+    color: red;
+}

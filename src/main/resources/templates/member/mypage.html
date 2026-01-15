@@ -3,57 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
 <body>
-    <p><a th:href="@{/}">HOME</a></p>
+    <div class="container">
+        <p class="top-link">
+            <a th:href="@{/}">HOME</a>
+        </p>
 
-    <h2>마이페이지 (<span th:text="${loginId}"></span>)</h2>
+        <h2>마이페이지 (<span th:text="${loginId}"></span>)</h2>
 
-    <!-- 내 모임 -->
-    <h3>[ 내 모임 ]</h3>
+        <!-- 내 모임 -->
+        <h3>[ 내 모임 ]</h3>
 
-    <table border="1">
-        <tr>
-            <th>모임명</th>
-            <th>주최자</th>
-            <th>모집현황</th>
-        </tr>
+        <table border="1">
+            <tr>
+                <th>모임명</th>
+                <th>주최자</th>
+                <th>모집현황</th>
+            </tr>
 
-        <tr th:each="g : ${hostList}">
-            <td>
-                <a th:href="@{/board/detail(boardNum=${g.board.boardNum})}"
-                   th:text="${g.board.title}"></a>
-            </td>
-            <td th:text="${g.board.member.memberId}"></td>
-            <td th:text="|${g.board.status} (${g.board.headcnt} / ${g.board.capacity})|"
-                th:style="${g.board.status eq 'OPEN'} ? 'color:blue' : 'color:red'">
-            </td>
-        </tr>
-    </table>
+            <tr th:each="g : ${hostList}">
+                <td>
+                    <a th:href="@{/board/detail(boardNum=${g.board.boardNum})}"
+                       th:text="${g.board.title}"></a>
+                </td>
+                <td th:text="${g.board.member.memberId}"></td>
+                <td th:text="|${g.board.status} (${g.board.headcnt} / ${g.board.capacity})|"
+                    th:style="${g.board.status eq 'OPEN'} ? 'color:blue' : 'color:red'">
+                </td>
+            </tr>
+        </table>
 
-    <br>
+        <br>
 
-    <!-- 참여한 모임 -->
-    <h3>[ 참여한 모임 ]</h3>
+        <!-- 참여한 모임 -->
+        <h3>[ 참여한 모임 ]</h3>
 
-    <table border="1">
-        <tr>
-            <th>모임명</th>
-            <th>주최자</th>
-            <th>모집현황</th>
-        </tr>
+        <table border="1">
+            <tr>
+                <th>모임명</th>
+                <th>주최자</th>
+                <th>모집현황</th>
+            </tr>
 
-        <tr th:each="g : ${joinList}">
-            <td>
-                <a th:href="@{/board/detail(boardNum=${g.board.boardNum})}"
-                   th:text="${g.board.title}"></a>
-            </td>
-            <td th:text="${g.board.member.memberId}"></td>
-            <td th:text="|${g.board.status} (${g.board.headcnt} / ${g.board.capacity})|"
-                th:style="${g.board.status eq 'OPEN'} ? 'color:blue' : 'color:red'">
-            </td>
-        </tr>
-    </table>
-
+            <tr th:each="g : ${joinList}">
+                <td>
+                    <a th:href="@{/board/detail(boardNum=${g.board.boardNum})}"
+                       th:text="${g.board.title}"></a>
+                </td>
+                <td th:text="${g.board.member.memberId}"></td>
+                <td th:text="|${g.board.status} (${g.board.headcnt} / ${g.board.capacity})|"
+                    th:style="${g.board.status eq 'OPEN'} ? 'color:blue' : 'color:red'">
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
