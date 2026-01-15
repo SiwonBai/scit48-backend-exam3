@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIST</title>
+    <script th:src="@{/js/jquery-3.7.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+    <p><a th:href="@{/}">HOME</a></p>
+
+    <h2>게시판</h2>
+
+    <!-- 카테고리 검색 -->
+    <form th:action="@{/board/list}" method="get">
+        <select name="category" onchange="this.form.submit()">
+            <option value="ALL"
+                    th:selected="${category == null or category == 'ALL'}">
+                전체 카테고리 보기
+            </option>
+            <option value="STUDY"
+                    th:selected="${category == 'STUDY'}">STUDY</option>
+            <option value="HEALTHY"
+                    th:selected="${category == 'HEALTHY'}">HEALTHY</option>
+            <option value="TRIP"
+                    th:selected="${category == 'TRIP'}">TRIP</option>
+        </select>
+    </form>
+
+    <button onclick="location.href='/board/write'">글쓰기</button>
+
+    <br><br>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>카테고리</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>모집 상태</th>
+            <th>정원 수</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="board : ${list}">
+            <td th:text="${board.category}"></td>
+
+            <td>
+                <a th:href="@{/board/detail(boardNum=${board.boardNum})}"
+                   th:text="${board.title}">
+                </a>
+            </td>
+
+            <td th:text="${board.member.memberId}"></td>
+
+            <td th:text="${board.status}"
+                th:classappend="${board.status == 'OPEN'} ? 'status-open' : 'status-closed'">
+            </td>
+
+            <td th:text="|(${board.headcnt} / ${board.capacity})|"></td>
+
+            <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+`
+</body>
+</html>

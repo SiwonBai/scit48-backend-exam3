@@ -1,0 +1,33 @@
+.wrap {
+    width: 1100px;
+    margin: 80px auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #eaffea;
+}
+
+.status-open {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-closed {
+    color: red;
+    font-weight: bold;
+}
+
+a {
+    color: purple;
+    text-decoration: none;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>모집 현황</title>
+    <script th:src="@{/js/check.js}"></script>
+</head>
+<body>
+
+    <h2>모집 현황</h2>
+
+    <p>
+        모집 인원 :
+        <span th:text="|${board.headcnt} / ${board.capacity}|"></span>
+    </p>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>아이디</th>
+            <th>역할</th>
+            <th>상태</th>
+            <th>신청일</th>
+            <th>처리</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="g : ${list}">
+            <td th:text="${g.member.memberId}"></td>
+            <td th:text="${g.role}"></td>
+            <td th:text="${g.status}"></td>
+            <td th:text="${#temporals.format(g.joinedDate,'yy.MM.dd HH:mm')}"></td>
+
+            <td>
+                <!-- 승인 : PENDING + 모집중 -->
+                <form th:if="${g.status eq 'PENDING' and board.status eq 'OPEN'}"
+                      th:action="@{/group/approve}" method="post"
+                      style="display:inline"
+                      onsubmit="return approveConfirm()">
+                    <input type="hidden" name="groupId" th:value="${g.groupId}">
+                    <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+                    <button type="submit">승인</button>
+                </form>
+
+                <!-- 거절 : PENDING or JOINED + 모집중 -->
+                <form th:if="${(g.status eq 'PENDING' or g.status eq 'JOINED') and board.status eq 'OPEN'}"
+                      th:action="@{/group/reject}" method="post"
+                      style="display:inline"
+                      onsubmit="return rejectConfirm()">
+                    <input type="hidden" name="groupId" th:value="${g.groupId}">
+                    <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+                    <button type="submit">거절</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
